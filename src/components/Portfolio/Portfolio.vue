@@ -4,7 +4,7 @@
 
 <script>
 export default {
-
+  name: 'Portfolio_Component'
 }
 </script>
 
