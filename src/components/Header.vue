@@ -22,6 +22,9 @@
             <v-list-item>Load Data</v-list-item>
         </v-list>
       </v-menu>
+      <v-layout align-center>
+        <small :class="(funds > 0 ? 'greenText' : 'redText')">Funds: {{ funds }}</small>
+      </v-layout>
     </v-toolbar-items>
 
   </v-toolbar>
@@ -34,10 +37,23 @@ export default {
     return {
       down: true,
     }
+  },
+  computed: {
+    funds() {
+      return this.$store.getters.funds
+    }
   }
 }
 </script>
 
 <style scoped>
-
+ .greenText {
+  color: #6fba3b;
+  text-transform: capitalize;
+ }
+ .redText {
+  color:#e83b3b;
+  text-transform: capitalize;
+ }
+ 
 </style>

@@ -50,7 +50,7 @@ export default {
         stockPrice: this.stock.price,
         quantity: this.quantity,
       };
-      console.log(ORDER);
+      this.$store.dispatch('buyStock', ORDER)
       this.quantity = 0;
     },
   },
