@@ -4,7 +4,7 @@
     <v-alert border="left" type="info">You can save and load your data</v-alert>
     <v-alert border="left" type="success">Click on end day to start a new day!</v-alert>
     <v-divider class="my-4"></v-divider>
-    <p class="headline"><strong>Your Funds: </strong>{{ funds }}</p>
+    <p class="headline"><strong>Your Funds: </strong>{{ funds | currency }}</p>
   </div>
 </template>
 

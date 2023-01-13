@@ -14,16 +14,16 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-items>
-      <v-btn text>End Day</v-btn>
+      <v-btn @click="endDay" text>End Day</v-btn>
       <v-menu :close-on-click="false" offset-y>
         <template v-slot:activator="{ on }"> <v-btn @click="down = !down" text v-on="on">Save and Load <v-icon class="ms-1" small>{{ down ? 'fa-caret-down' : 'fa-caret-up' }}</v-icon></v-btn></template>
         <v-list>
-            <v-list-item>Save Data</v-list-item>
-            <v-list-item>Load Data</v-list-item>
+            <v-list-item @click="saveData">Save Data</v-list-item>
+            <v-list-item @click="loadLocalData">Load Data</v-list-item>
         </v-list>
       </v-menu>
       <v-layout align-center>
-        <small :class="(funds > 0 ? 'greenText' : 'redText')">Funds: {{ funds }}</small>
+        <small :class="(funds > 0 ? 'greenText' : 'redText')">Funds: {{ funds | currency }}</small>
       </v-layout>
     </v-toolbar-items>
 
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
   name: 'header_Componennt',
   data() {
@@ -41,6 +43,22 @@ export default {
   computed: {
     funds() {
       return this.$store.getters.funds
+    }
+  },
+  created() {
+    this.loadData()
+  },
+  methods: {
+    ...mapActions(['randomizeStocks', 'loadData']),
+    endDay() {
+      this.randomizeStocks()
+    },
+    saveData() {
+      const {funds, stockPortfolio, stocks} = this.$store.getters
+      this.$http.put('data.json', {funds, stockPortfolio, stocks})
+    },
+    loadLocalData() {
+      this.loadData()
     }
   }
 }

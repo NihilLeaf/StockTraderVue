@@ -3,7 +3,9 @@
     <v-main>
       <Header />
       <v-container>
-        <router-view></router-view>
+        <transition name="slide" mode="out-in">
+          <router-view></router-view>
+        </transition>    
       </v-container>
     </v-main>
   </v-app>
@@ -33,4 +35,35 @@ export default {
 #bg {
   background: linear-gradient(to left, #090a14, #10141f);
 }
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+
+.slide-enter-active {
+  animation: slide-in 0.3s ease;
+}
+
+.slide-leave-active {
+  animation: slide-out 0.3s ease;
+}
+
 </style>
